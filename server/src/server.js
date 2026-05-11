@@ -29,6 +29,15 @@ app.use("/api/bookings", bookingRoutes);
 // MongoDB Connection
 connectDB();
 
+// health check endpoint
+app.get("/api/health",(req,res)=>{
+  res.status(200).json({
+    status:"Ok",
+    server:"server is healthy",
+    timestamp:new Date().toISOString()
+  })
+})
+
 // Socket.io
 const io = initSocket(httpServer);
 app.use((req, res, next) => {
